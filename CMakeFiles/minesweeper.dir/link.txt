@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/minesweeper.dir/src/minesweeper.cpp.o  -o minesweeper  -L/home/belo/Desktop/minesweeper/minesweeper/libs/src -Wl,-rpath,/home/belo/Desktop/minesweeper/minesweeper/libs/src /usr/lib/x86_64-linux-gnu/libGL.so -Wl,-Bstatic -lglfw3 -Wl,-Bdynamic -lpthread -lX11 -ldl 

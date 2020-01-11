@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/minesweeper.h
+iostream
+-
+vector
+-
+
+/home/belo/Desktop/minesweeper/src/main.cpp
+minesweeper.h
+/home/belo/Desktop/minesweeper/src/minesweeper.h
+
+/home/belo/Desktop/minesweeper/src/minesweeper.cpp
+minesweeper.h
+/home/belo/Desktop/minesweeper/src/minesweeper.h
+stdlib.h
+-
+GL/glew.h
+-
+GLFW/glfw3.h
+-
+glm/glm.hpp
+-
+

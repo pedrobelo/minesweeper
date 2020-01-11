@@ -1,0 +1,3 @@
+/home/belo/Desktop/minesweeper/minesweeper/CMakeFiles/rebuild_cache.dir
+/home/belo/Desktop/minesweeper/minesweeper/CMakeFiles/minesweeper.dir
+/home/belo/Desktop/minesweeper/minesweeper/CMakeFiles/edit_cache.dir
