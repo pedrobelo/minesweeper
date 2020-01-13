@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.10.2)
 #give the project a name
 project(minesweeper)
 
+set(CMAKE_CXX_FLAGS "-g -Wall")
 
 find_package(OpenGL REQUIRED)
 #Bring the headers into the project

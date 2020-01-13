@@ -4,4 +4,7 @@
 CMakeFiles/minesweeper.dir/src/minesweeper.cpp.o
  /home/belo/Desktop/minesweeper/minesweeper/src/minesweeper.cpp
  include/board.h
+ include/cell.h
+ include/def.h
+ include/gui.h
  include/minesweeper.h
