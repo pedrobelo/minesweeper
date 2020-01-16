@@ -10,7 +10,7 @@
 int main()
 {
 	
-	Board _board(10, 10);
+	Board _board(10, 10, 10);
 	_board.run();
 	return 0;
 }

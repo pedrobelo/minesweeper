@@ -1,5 +1,8 @@
 #pragma once
 
+#include <cstdlib>
+#include <ctime>
+
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include "def.h"
@@ -12,7 +15,7 @@ cell corresponds to a square in the minesweeper game. Each cell is defined by
 two values: Visibility and content.
 
 	visibility --> shows the visibility of the cell. The visibility is the information the player
-				has access to. For instance, a cell can be UNEXOLORED,
+				has access to. For instance, a cell can be UNEXPLORED,
 				FREE, BOMB (in which case, the game has been lost) and finnaly it can
 				be FLAGGED.
 
@@ -29,20 +32,22 @@ public:
 
 	Visibility getVisibility() const;
 	int getContent() const;
+
 	Visibility explore();
 	bool flag();
 	bool unflag();
 
+	static void initBoard(std::vector<std::vector<Cell>>& cells, int bomb_cnt);
+
 private:
 	Visibility _visibility;
-	int _content;
-	
+	int _content;	
 };
 
 
 //cell is initialized with a given content in [-1,8] and Visibility
-Cell::Cell() : _visibility(UNEXOLORED), _content(0) {}
-Cell::Cell(int content) : _visibility(UNEXOLORED), _content(content) {}
+Cell::Cell() : _visibility(UNEXPLORED), _content(0) {}
+Cell::Cell(int content) : _visibility(UNEXPLORED), _content(content) {}
 
 //get info of a cell
 int Cell::getContent() const {
@@ -59,13 +64,13 @@ Visibility Cell::getVisibility() const {
 }
 
 //explore a cell, making it available to the player. If the cell has a
-//visibility other than UNEXOLORED, then nothing happens and the current
+//visibility other than UNEXPLORED, then nothing happens and the current
 //vivibility is returned
 Visibility Cell::explore() {
-	if(_visibility != UNEXOLORED)
+	if(_visibility != UNEXPLORED)
 		return _visibility;
 
-	if(_content == BOMB) {
+	if(_content == (int)BOMB) {
 		_visibility = BOMB;
 		return _visibility;
 	}
@@ -77,7 +82,7 @@ Visibility Cell::explore() {
 
 //flags a cell to represent a bomb. Only useful for the player
 bool Cell::flag() {
-	if(_visibility != UNEXOLORED)
+	if(_visibility != UNEXPLORED)
 		return false;
 
 	_visibility = FLAGGED;
@@ -89,6 +94,32 @@ bool Cell::unflag() {
 	if(_visibility != FLAGGED)
 		return false;
 
-	_visibility = UNEXOLORED;
+	_visibility = UNEXPLORED;
 	return true;
 }
+
+void Cell::initBoard(std::vector<std::vector<Cell>>& cells, int bomb_cnt) {
+	int height = (int)cells.size();
+	int width = (int)cells[0].size();
+
+	std::srand(std::time(0));
+
+	for (int cnt = 0; cnt < bomb_cnt; cnt++) {
+		int row = std::rand()%height;
+		int col = std::rand()%width;
+
+		if(cells[row][col]._content == (int)BOMB) {
+			cnt--;
+			continue;
+		}
+
+		cells[row][col]._content = (int)BOMB;
+		for (int i = -1; i <= 1; i++)
+			for (int j = -1; j <= 1; j++)
+				if(row+i >= 0 && row+i < height && col+j >= 0 && col+j < width)
+					if(cells[row+i][col+j]._content != (int)BOMB)
+						cells[row+i][col+j]._content++;
+
+	}
+}
+

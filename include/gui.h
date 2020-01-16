@@ -62,7 +62,7 @@ void Gui::mouseButtonCallback(GLFWwindow* window, int button, int action, int mo
 	else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
 		glfwGetCursorPos(window, &xpos, &ypos);
 		_last_pressed_x = (int)xpos/SQUARE_SIZE;
-		_last_pressed_y = _height-(int)ypos/SQUARE_SIZE+1;
+		_last_pressed_y = _height-(int)ypos/SQUARE_SIZE-1;
 		_mouse_button = RIGHT;
 		_pressed = true;
 	}
@@ -392,9 +392,9 @@ void Gui::drawBoard(const std::vector<std::vector<Cell>>& c) {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(0.5, 0.5, 0.5);
 
-	for(int i=0; i < c.size(); i++) {
-		for(int j=0; j < c[i].size(); j++) {
-			if(c[i][j].getVisibility() == UNEXOLORED) {
+	for(uint i=0; i < c.size(); i++) {
+		for(uint j=0; j < c[i].size(); j++) {
+			if(c[i][j].getVisibility() == UNEXPLORED) {
 				drawUnpressedSquare(i, j);
 			}
 			else if(c[i][j].getVisibility() == FLAGGED) {
@@ -404,13 +404,13 @@ void Gui::drawBoard(const std::vector<std::vector<Cell>>& c) {
 		}
 	}
 
-	for(int i=0; i < c.size(); i++) {
-		for(int j=0; j < c[i].size(); j++) {
+	for(uint i=0; i < c.size(); i++) {
+		for(uint j=0; j < c[i].size(); j++) {
 			if(c[i][j].getVisibility() == BOMB) {
 				drawPressedSquare(i, j);
 				drawBomb(i,j);
 			}
-			else if(c[i][j].getVisibility() == FLAGGED) {
+			else if(c[i][j].getVisibility() == FREE) {
 				drawPressedSquare(i, j);
 				drawNumber(i,j,c[i][j].getContent());
 			}

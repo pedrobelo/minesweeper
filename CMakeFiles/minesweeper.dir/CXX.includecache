@@ -19,6 +19,8 @@ board.h
 /home/belo/Desktop/minesweeper/minesweeper/src/board.h
 
 include/board.h
+cstdlib
+-
 GLFW/glfw3.h
 -
 cmath
@@ -29,6 +31,10 @@ gui.h
 include/gui.h
 
 include/cell.h
+cstdlib
+-
+ctime
+-
 GLFW/glfw3.h
 -
 cmath
